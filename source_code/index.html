@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/css/uikit.min.css" />
+
+<!-- UIkit JS -->
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/js/uikit-icons.min.js"></script>
+<script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+<body>
+    <!-- <script src="lunrjs.js"></script> -->
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <script>
+        var documents = [{
+    "name": "Lunr",
+    "text": "Like Solr, but much smaller, and not as bright."
+  }, {
+    "name": "React",
+    "text": "A JavaScript library for building user interfaces."
+  }, {
+    "name": "Lodash",
+    "text": "A modern JavaScript utility library delivering modularity, performance & extras."
+  }]
+
+  var idx = lunr(function () {
+    this.ref('name')
+    this.field('text')
+  
+    documents.forEach(function (doc) {
+      this.add(doc)
+    }, this)
+  })
+
+    function showr(){
+        var res = idx.search("bright");
+        console.log(res);
+        var para = document.createElement("P");
+        para.innerHTML =  "HI there wassup";
+        document.getElementById("result").appendChild(para);
+    }
+    
+    </script>
+
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-right ">
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="#">Home</a></li>
+                <li>
+                    <a href="#">Parent</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li class="uk-active"><a href="#">Home</a></li>
+                            <li><a href="#">Coming soon...</a></li>
+                        </ul>
+                    </div>  
+                </li>
+            </ul>
+    
+        </div>
+    </nav>
+
+    <div class="uk-section uk-section-primary uk-light">
+    <div class="uk-container">
+        <div><h3>Code Search using Lunr</h3></div>
+        <div class="uk-width-1-6">
+        </div>
+        <div class="uk-width-4-6">
+        <div class="uk-container">
+            <div class="uk-margin-small-top uk-cover-container">
+            <img src="./source_code.svg" alt="">
+            </div>
+        </div>
+        </div>
+        <div class="uk-width-1-6">
+        </div>
+    </div>
+    <div class="uk-container">
+        <div class="uk-width-1-6">
+        </div>
+        <div class="uk-width-4-6">
+        <div class="uk-margin">
+            <form class="uk-search uk-search-large" action="">
+                <button uk-search-icon onclick="showr()" ></button>
+                <input class="uk-search-input" id="search_field" type="search" placeholder="Search...">
+            </form>
+        </div>
+        </div>
+        <div class="uk-width-1-6">
+        </div>        
+    </div>
+    </div>
+    <div class="uk-section uk-dark uk-section-secondary">
+    </div>
+
+    <div > 
+        <h2>Hi there</h2>
+        <p id="result"> </p>
+    </div>
+
+</body>
+</html>
